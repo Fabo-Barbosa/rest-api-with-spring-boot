@@ -11,6 +11,8 @@
 *.jar
 *.war
 *.ear
+*.yml
+*.yaml
 
 # Gradle temporary files
 target/
