@@ -3,7 +3,6 @@ package br.com.fabodev.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,16 +15,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fabodev.data.vo.v1.PersonVO;
 import br.com.fabodev.services.PersonServices;
+import br.com.fabodev.utils.MediaType;
 
 @RestController
-@RequestMapping(value = "/person")
+@RequestMapping(value = "/person/v1")
 public class PersonController {
 	
 	@Autowired
 	private PersonServices service;
 	
 	// Substitui @RequestMapping(method = RequestMethod.GET)
-	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(produces = {MediaType.APPLICATION_JSON, 
+			MediaType.APPLICATION_XML,
+			MediaType.APPLICATION_YML})
 	public List<PersonVO> findAll(
 			) throws Exception {
 		
@@ -33,7 +35,9 @@ public class PersonController {
 	}
 	
 	@GetMapping(value = "/{id}",
-			produces = MediaType.APPLICATION_JSON_VALUE)
+			produces = {MediaType.APPLICATION_JSON, 
+					MediaType.APPLICATION_XML,
+					MediaType.APPLICATION_YML})
 	public PersonVO getById(
 			@PathVariable(value = "id") Long idPerson
 			) throws Exception {
@@ -41,8 +45,12 @@ public class PersonController {
 		return service.getById(idPerson);
 	}
 	
-	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
-			produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(consumes = {MediaType.APPLICATION_JSON, 
+			MediaType.APPLICATION_XML,
+			MediaType.APPLICATION_YML},
+			produces = {MediaType.APPLICATION_JSON, 
+					MediaType.APPLICATION_XML,
+					MediaType.APPLICATION_YML})
 	public PersonVO create(
 			@RequestBody PersonVO person
 			) throws Exception {
@@ -50,8 +58,12 @@ public class PersonController {
 		return service.create(person);
 	}
 	
-	@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
-			produces = MediaType.APPLICATION_JSON_VALUE)
+	@PutMapping(consumes = {MediaType.APPLICATION_JSON, 
+			MediaType.APPLICATION_XML,
+			MediaType.APPLICATION_YML},
+			produces = {MediaType.APPLICATION_JSON, 
+					MediaType.APPLICATION_XML,
+					MediaType.APPLICATION_YML})
 	public PersonVO update(
 			@RequestBody PersonVO person
 			) throws Exception {

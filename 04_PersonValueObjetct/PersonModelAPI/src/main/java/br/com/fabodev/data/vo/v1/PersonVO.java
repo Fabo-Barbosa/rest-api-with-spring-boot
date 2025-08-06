@@ -21,7 +21,7 @@ public class PersonVO implements Serializable{
 	private String lastName;
 	private String address;
 	
-	@JsonIgnore // don't show the gender on json
+	//@JsonIgnore // don't show the gender on json
 	private String gender;
 	
 	
